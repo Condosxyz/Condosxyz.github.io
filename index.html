@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condo Hub</title>
+    <style>
+        body {
+            background-color: #222;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-size: 50px;
+        }
+        .hub {
+            background-color: #ffb300;
+            padding: 5px 10px;
+            color: black;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .section {
+            margin: 20px 0;
+        }
+        .games-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .game-card {
+            background-color: #333;
+            width: 200px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+        .game-card:hover {
+            transform: scale(1.05); /* Zoom effect for the whole card */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Add shadow when hovered */
+        }
+        .game-card h3 {
+            margin: 5px 0;
+            font-size: 16px;
+        }
+        .game-card p {
+            font-size: 14px;
+        }
+        .game-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        .game-card a {
+            display: block;
+            text-decoration: none;
+            color: inherit; /* Inherit the text color from parent */
+        }
+        .game-image:hover {
+            transform: scale(1.1); /* Zoom in effect for the image */
+        }
+        /* Blurring effect */
+        .blurred {
+            filter: blur(8px);
+            cursor: pointer; /* Allow clicks on the blurred game cards */
+        }
+
+        /* Pop-up styling */
+        .popup {
+            display: none; /* Hidden by default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+            z-index: 1000; /* Ensure it's on top */
+            align-items: center;
+            justify-content: center;
+        }
+        .popup-content {
+            background-color: #333;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s ease;
+        }
+        .popup input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 2px solid #ffb300;
+            background-color: #222;
+            color: white;
+        }
+        .popup button {
+            padding: 10px;
+            width: 80%;
+            border-radius: 5px;
+            border: 2px solid #ffb300;
+            background-color: #ffb300;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .popup button:hover {
+            background-color: #e59400;
+        }
+        .popup-close {
+            position: absolute;
+            top: 10px;
+            right: 200px;
+            background-color: #ffb300;
+            border: none;
+            border-radius: 50%;
+            color: black;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <span>CONDO</span>
+        <span class="hub">HUB</span>
+    </div>
+
+    <div class="section">
+        <h2>HOT GAMES 🔥</h2>
+        <div class="games-container">
+            <!-- First Game Card -->
+            <div class="game-card">
+                <a href="https://shrt.asia/XBf-ZhN9" target="_blank">
+                    <img src="1.jpg" alt="Game 1" class="game-image">
+                    <h3>Game 1</h3>
+                    <p>👥 22 👍 79%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+            <!-- Second Game Card -->
+            <div class="game-card">
+                <a href="https://shrt.asia/XBf-ZhN9" target="_blank">
+                    <img src="2.jpg" alt="Game 2" class="game-image">
+                    <h3>Game 2</h3>
+                    <p>👥 14 👍 72%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+            <!-- Third Game Card -->
+            <div class="game-card">
+                <a href="https://shrt.asia/XBf-ZhN9" target="_blank">
+                    <img src="3.jpg" alt="Game 3" class="game-image">
+                    <h3>Game 3</h3>
+                    <p>👥 35 👍 85%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+            <!-- Fourth Game Card -->
+            <div class="game-card">
+                <a href="https://shrt.asia/XBf-ZhN9" target="_blank">
+                    <img src="4.jpg" alt="Game 4" class="game-image">
+                    <h3>Game 4</h3>
+                    <p>👥 47 👍 92%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>TOP PAID GAMES ❤️</h2>
+        <div class="games-container">
+            <!-- First Premium Game Card (Initially blurred) -->
+            <div class="game-card blurred" id="premium1">
+                <a href="https://shrt.asia/XBf-ZhN9" id="link1" target="_blank" onclick="return false;">
+                    <img src="5.jpg" alt="Premium Game 1" class="game-image">
+                    <h3>Premium Game 1</h3>
+                    <p>👥 58 👍 98%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+            <!-- Second Premium Game Card (Initially blurred) -->
+            <div class="game-card blurred" id="premium2">
+                <a href="https://shrt.asia/XBf-ZhN9" id="link2" target="_blank" onclick="return false;">
+                    <img src="6.jpg" alt="Premium Game 2" class="game-image">
+                    <h3>Premium Game 2</h3>
+                    <p>👥 47 👍 94%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+            <!-- Third Premium Game Card (Initially blurred) -->
+            <div class="game-card blurred" id="premium3">
+                <a href="https://shrt.asia/XBf-ZhN9" id="link3" target="_blank" onclick="return false;">
+                    <img src="7.jpg" alt="Premium Game 3" class="game-image">
+                    <h3>Premium Game 3</h3>
+                    <p>👥 63 👍 85%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+            <!-- Fourth Premium Game Card (Initially blurred) -->
+            <div class="game-card blurred" id="premium4">
+                <a href="https://shrt.asia/XBf-ZhN9" id="link4" target="_blank" onclick="return false;">
+                    <img src="8.jpg" alt="Premium Game 4" class="game-image">
+                    <h3>Premium Game 4</h3>
+                    <p>👥 50 👍 91%</p>
+                    <p>Created by: XYZGames</p>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Pop-up modal for token input -->
+    <div id="tokenPopup" class="popup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">X</button>
+            <h2>Enter Access Token</h2>
+            <input type="text" id="tokenInput" placeholder="Enter the token...">
+            <button onclick="validateToken()">Submit</button>
+        </div>
+    </div>
+
+    <script>
+        const correctToken = "LLaWmKGkqepcX1YOfbP77mwuT";
+        let isUnlocked = false; // Track if the premium games have been unlocked
+
+        function askForToken() {
+            if (!isUnlocked) { // Only ask for the token if it's not unlocked yet
+                document.getElementById("tokenPopup").style.display = "flex"; // Show the token input pop-up
+            }
+        }
+
+        function closePopup() {
+            document.getElementById("tokenPopup").style.display = "none"; // Close the pop-up
+        }
+
+        function validateToken() {
+            const token = document.getElementById("tokenInput").value;
+            if (token === correctToken) {
+                // Unblur all the game cards and enable clicking
+                const blurredCards = document.querySelectorAll(".blurred");
+                blurredCards.forEach(card => {
+                    card.classList.remove("blurred");
+                    // Enable the link click by setting 'onclick' to allow navigation
+                    const link = card.querySelector("a");
+                    link.setAttribute("onclick", "return true;");
+                });
+                isUnlocked = true; // Mark as unlocked
+                alert("Access granted! All games are now unlocked.");
+                closePopup(); // Close the token prompt after success
+            } else {
+                alert("Incorrect token! Please try again.");
+            }
+        }
+
+        // Add click event to all the blurred premium game cards
+        const premiumCards = document.querySelectorAll(".blurred");
+        premiumCards.forEach(card => {
+            card.addEventListener("click", function() {
+                if (!isUnlocked) { // Only ask for the token if not already unlocked
+                    askForToken();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
